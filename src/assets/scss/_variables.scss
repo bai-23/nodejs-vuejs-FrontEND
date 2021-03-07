@@ -1,0 +1,71 @@
+/*
+  scss变量文件
+*/
+
+/*
+  定义色彩风格变量  ***************************************************
+*/
+$colors: (
+  "primary": #db933f,
+  "info": #4b67af,
+  "danger": #791a15,
+  "blue": #4394e4,
+  "blue-1": #1f3695,
+  "white": #fff,
+  "white-1": #fcfcfc,
+  "white-2": #eceef0,
+  "light": #f9f9f9,
+  "light-1": #d4d9de,
+  "grey": #999,
+  "grey-1": #666,
+  "dark-1": #343440,
+  "dark": #222,
+  "black": #000,
+);
+$border-color: map_get($colors, 'light-1'); // 边框颜色
+
+/*
+  font-size：字体尺寸（工具类）  ***************************************************
+  */
+$base-font-size: 1rem;  // 相对于html定义的字体大小倍数：13px(1rem)
+$font-sizes: (
+  xxs: 0.6154,// 8px
+  xs: 0.7692, // 10px
+  sm: 0.9231, // 12px
+  md: 1,      // 13px
+  lg: 1.0769, // 14px
+  xl: 1.2308  // 16px
+);
+
+/* 主轴对齐方式: justify-content */
+$flex-jc: (
+  start: flex-start,
+  end: flex-end,
+  center: center,
+  between: space-between,
+  around: space-around,
+);
+
+/* 交叉轴对齐方式: align-items */
+$flex-ai: (
+  start: flex-start,
+  end: flex-end,
+  center: center,
+  stretch: stretch,
+);
+
+/*
+  常用边距定义（space） ***************************************************
+*/
+$spacing-types: ( m: margin, p: padding );
+$spacing-directions: ( t: top, r: right, b: bottom, l: left );
+$spacing-base-size: 1rem; /* 基础大小，后面的倍数表示该基础的多少倍 */
+$spacing-sizes: (
+  0: 0,
+  1: 0.25,
+  2: 0.5,
+  3: 1,
+  4: 1.5,
+  5: 3,
+);
+

@@ -1,0 +1,233 @@
+/*
+  基本样式表
+*/
+
+
+@import './variables';
+
+/* 重置样式 */
+* {
+  box-sizing: border-box;
+  outline: none;
+}
+html {
+  font-size: 13px;  /* base_font_size */
+}
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.2em; /* 1.2em~1.5em */
+  background-color: #f1f1f1;
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  color: #999;
+}
+p {
+  line-height: 1.5em;
+}
+
+/*
+  定义色彩风格变量  ***************************************************
+*/
+/* color&background-color：生成色彩(工具类) */
+@each $colorKey, $color in $colors {
+  .text-#{$colorKey} {
+    color: $color;  /* 字体颜色类 */
+  }
+  .bg-#{$colorKey} {
+    background-color: $color; /* 背景颜色类 */
+  }
+}
+
+/*
+  text-align：文本对齐方式（工具类）  ***************************************************
+*/
+@each $var in (left, center, right) {
+  .text-#{$var} {
+    text-align: $var !important;
+  }
+}
+
+/*
+  font-size：字体尺寸（工具类）  ***************************************************
+  */
+@each $sizeKey,$size in $font-sizes {
+  .fs-#{$sizeKey} {
+    font-size: $size * $base-font-size;
+  }
+}
+
+/*
+  text overflow
+    内容越界显示省略号
+*/
+.text-ellipsis {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*
+  width & height *************************************************************
+*/
+.w-100 {
+  width: 100%;
+}
+.h-100 {
+  height: 100%;
+}
+
+/*
+  通用flex布局样式 ***************************************************
+*/
+.d-flex {
+  display: flex;
+  /* 默认垂直布局 */
+}
+.flex-column {
+  flex-direction: column; /* 水平布局 */
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+/* 主轴对齐方式: justify-content */
+@each $key, $value in $flex-jc {
+  .jc-#{$key} {
+    justify-content: $value;
+  }
+}
+/* 交叉轴对齐方式: align-items */
+@each $key, $value in $flex-ai {
+  .ai-#{$key} {
+    align-items: $value;
+  }
+}
+
+// 占用剩余空间
+.flex-1 {
+  flex: 1;
+}
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+/*
+  常用边距定义（space） ***************************************************
+*/
+@each $typeKey, $type in $spacing-types {
+  // .m-1
+  @each $sizeKey, $size in $spacing-sizes {
+    /* .m-1 { margin: 0.25rem } */
+    .#{$typeKey}-#{$sizeKey} {
+      #{$type}: $size * $spacing-base-size;
+    }
+  }
+
+  @each $sizeKey, $size in $spacing-sizes {
+    // .mx-1  水平边距
+    .#{$typeKey}x-#{$sizeKey} {
+      #{$type}-left: $size * $spacing-base-size;
+      #{$type}-right: $size * $spacing-base-size;
+    }
+    // .my-1 上下边距
+    .#{$typeKey}y-#{$sizeKey} {
+      #{$type}-top: $size * $spacing-base-size;
+      #{$type}-bottom: $size * $spacing-base-size;
+    }
+  }
+
+  // .mt-1
+  @each $directionKey, $direction in $spacing-directions {
+    @each $sizeKey, $size in $spacing-sizes {
+      /* .mt-1 { margin: 0.25rem } */
+      .#{$typeKey}#{$directionKey}-#{$sizeKey} {
+        #{$type}-#{$direction}: $size * $spacing-base-size;
+      }
+    }
+  }
+}
+
+/*
+  button ***************************************************
+*/
+.btn{
+  border: none;
+  border-radius: 0.1538rem;
+  font-size: map_get($font-sizes, 'sm') * $base-font-size;
+  padding: 0.2rem 0.6rem;
+
+  &.btn-lg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: map_get($colors, 'white-1');
+    border: 1px solid map_get($colors, 'white-2');
+    padding: 0.8rem 1rem;
+    font-size: 1.2rem;
+
+    i {
+      color: map_get($colors, 'primary');
+      font-weight: bold;
+      font-size: 1.5rem;
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+/*
+  nav ***************************************************
+*/
+.nav {
+  display: flex;
+  //justify-content: space-around;
+
+  .nav-item {
+    border-bottom: 3px solid transparent;
+    padding-bottom: 0.2rem;
+
+    // 高亮
+    &.active {
+      color: map_get($colors, 'primary');
+      border-bottom-color: map_get($colors, 'primary');
+    }
+  }
+  /* 反色 */
+  &.nav-inverse {
+    .nav-item {
+      color: map_get($colors, 'white');
+      &.active {
+        border-bottom-color: map_get($colors, 'white');
+      }
+    }
+  }
+}
+
+/* sprite 精灵图 */
+.sprite {
+  background: url(../images/index.png) no-repeat 0 0;
+  background-size: 28.8462rem;
+  display: inline-block;
+
+  &.sprite-news {
+    width: 1.7692rem;
+    height: 1.5385rem;
+    background-position: 63.546% 15.517%;
+  }
+  &.sprite-arrow{
+    width: 0.7692rem;
+    height: 0.7692rem;
+    background-position: 38.577% 52.076%;
+  }
+
+}
+
+/* borders */
+@each $dir in (top, right, bottom, left) {
+  .border-#{$dir} {
+    border-#{$dir}: 1px solid $border-color;
+  }
+}
